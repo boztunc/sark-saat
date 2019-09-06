@@ -1,0 +1,42 @@
+<!--THIS PAGE IS AN EXAMPLE FOR HOW TO LOOKS LIKE AT OUTDOOR SCREEN-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Şark Saat | Akmerkez</title>
+    <link rel="stylesheet" href="../assets/style/akmerkez.css">
+    <script src="../assets/js/jquery-3.4.1.js"></script>
+    <script src="../assets/js/socket.io.js"></script>
+    <script src="../assets/js/desktop.js"></script>
+</head>
+
+<body>
+    <div class="sliderContainer">
+        <img src="../assets/images/screen/1.png" />
+        <img src="../assets/images/screen/2.png" style="margin: 0 auto;" />
+        <img src="../assets/images/screen/3.png" style="margin: 0 auto;" />
+
+        <div class="nextCircle">
+            <div class="next"></div>
+        </div>
+        <div class="prevCircle">
+            <div class="previous"></div>
+        </div>
+    </div>
+
+    <script>
+        var socket = io.connect("http://sarksaat.themediamove.com");
+        socket.emit("room", { screen: 2 }); //Outdoor Screen ID Getting From Url ex: http://sarksaat.themediamove.com?screenId=2
+        socket.on("sarkSaat", function (data) {
+            var command = Object.values(data);
+            if (command == "next")
+                $('.next').click()
+            else if (command == "prev")
+                $('.previous').click()
+        });
+    </script>
+
+</body>
+
+</html>
